@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 
 
-class News extends React.Component {
+function App(){
   state = {
     datas: [],
     isLoading: true,
     errors: null
   };
 
-  Databerita() {
+  Databerita()
     axios
       .get(
         'https://newsapi.org/v2/top-headlines?country=id&apiKey=41c65c464645e6440791b929f0d26153ac'
@@ -40,13 +40,11 @@ class News extends React.Component {
       .catch(error => this.setState({ error, isLoading: false }));
   }
 
-
-
-  componentDidMount() {
+  useEffect(() => {
     this.Databerita();
-  }
-
-  render() {
+  }, []);
+    
+  const Effect = () => {
     const { isLoading, datas } = this.state;
     return (
       <React.Fragment>
@@ -107,6 +105,5 @@ class News extends React.Component {
       </React.Fragment>
     );
   }
-}
 
 export default News;

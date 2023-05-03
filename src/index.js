@@ -1,237 +1,256 @@
-// variables
-const generalBtn = document.getElementById("genral");
-const businessBtn = document.getElementById("business");
-const sportsBtn = document.getElementById("sport");
-const entertainmentBtn = document.getElementById("entertainment");
-const technologyBtn = document.getElementById("technology");
-const searchBtn = document.getElementById("searchBtn");
-
-const newsQuery = document.getElementById("newsQuery");
-const newsType = document.getElementById("newsType");
-const newsdetails = document.getElementById("newsdetails");
-
-// Array
-var newsDataArr = [];
-
-// apis 
-const API_KEY = "32b79ea040274c1db36d2ebbcd898963";
-const HEADLINES_NEWS = "https://newsapi.org/v2/top-headlines?country=id&apiKey=";
-const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=general&apiKey=";
-const BUSINESS_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=";
-const SPORTS_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=sports&apiKey=";
-const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=entertainment&apiKey=";
-const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=technology&pageSize=8&apiKey=";
-const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
-
-window.onload = function() {
-    newsType.innerHTML="<h4>Headlines</h4>";
-    fetchHeadlines();
-};
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
 
-generalBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>General news</h4>";
-    fetchGeneralNews();
-});
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-businessBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>Business</h4>";
-    fetchBusinessNews();
-});
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
 
-sportsBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>Sports</h4>";
-    fetchSportsNews();
-});
+// // variables
+// const generalBtn = document.getElementById("genral");
+// const businessBtn = document.getElementById("business");
+// const sportsBtn = document.getElementById("sport");
+// const entertainmentBtn = document.getElementById("entertainment");
+// const technologyBtn = document.getElementById("technology");
+// const searchBtn = document.getElementById("searchBtn");
 
-entertainmentBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>Entertainment</h4>";
-    fetchEntertainmentNews();
-});
+// const newsQuery = document.getElementById("newsQuery");
+// const newsType = document.getElementById("newsType");
+// const newsdetails = document.getElementById("newsdetails");
 
-technologyBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>Technology</h4>";
-    fetchTechnologyNews();
-});
+// // Array
+// var newsDataArr = [];
 
-searchBtn.addEventListener("click",function(){
-    newsType.innerHTML="<h4>Search : "+newsQuery.value+"</h4>";
-    fetchQueryNews();
-});
+// // apis 
+// const API_KEY = "32b79ea040274c1db36d2ebbcd898963";
+// const HEADLINES_NEWS = "https://newsapi.org/v2/top-headlines?country=id&apiKey=";
+// const GENERAL_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=general&apiKey=";
+// const BUSINESS_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=";
+// const SPORTS_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=sports&apiKey=";
+// const ENTERTAINMENT_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=entertainment&apiKey=";
+// const TECHNOLOGY_NEWS = "https://newsapi.org/v2/top-headlines?country=id&category=technology&pageSize=8&apiKey=";
+// const SEARCH_NEWS = "https://newsapi.org/v2/everything?q=";
 
-const fetchHeadlines = async () => {
-    const response = await fetch(HEADLINES_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
-
-    displayNews();
-}
+// window.onload = function() {
+//     newsType.innerHTML="<h4>Headlines</h4>";
+//     fetchHeadlines();
+// };
 
 
-const fetchGeneralNews = async () => {
-    const response = await fetch(GENERAL_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
+// generalBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>General news</h4>";
+//     fetchGeneralNews();
+// });
 
-    displayNews();
-}
+// businessBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>Business</h4>";
+//     fetchBusinessNews();
+// });
 
-const fetchBusinessNews = async () => {
-    const response = await fetch(BUSINESS_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
+// sportsBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>Sports</h4>";
+//     fetchSportsNews();
+// });
 
-    displayNews();
-}
+// entertainmentBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>Entertainment</h4>";
+//     fetchEntertainmentNews();
+// });
 
-const fetchEntertainmentNews = async () => {
-    const response = await fetch(ENTERTAINMENT_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        console.log(myJson);
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
+// technologyBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>Technology</h4>";
+//     fetchTechnologyNews();
+// });
 
-    displayNews();
-}
+// searchBtn.addEventListener("click",function(){
+//     newsType.innerHTML="<h4>Search : "+newsQuery.value+"</h4>";
+//     fetchQueryNews();
+// });
 
-const fetchSportsNews = async () => {
-    const response = await fetch(SPORTS_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
+// const fetchHeadlines = async () => {
+//     const response = await fetch(HEADLINES_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-    displayNews();
-}
+//     displayNews();
+// }
 
-const fetchTechnologyNews = async () => {
-    const response = await fetch(TECHNOLOGY_NEWS+API_KEY);
-    newsDataArr = [];
-    if(response.status >=200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        // handle errors
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
 
-    displayNews();
-}
+// const fetchGeneralNews = async () => {
+//     const response = await fetch(GENERAL_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-const fetchQueryNews = async () => {
+//     displayNews();
+// }
 
-    if(newsQuery.value == null)
-        return;
+// const fetchBusinessNews = async () => {
+//     const response = await fetch(BUSINESS_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-    const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&apiKey="+API_KEY);
-    newsDataArr = [];
-    if(response.status >= 200 && response.status < 300) {
-        const myJson = await response.json();
-        newsDataArr = myJson.articles;
-    } else {
-        //error handle
-        console.log(response.status, response.statusText);
-        newsdetails.innerHTML = "<h5>No data found.</h5>"
-        return;
-    }
+//     displayNews();
+// }
 
-    displayNews();
-}
+// const fetchEntertainmentNews = async () => {
+//     const response = await fetch(ENTERTAINMENT_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         console.log(myJson);
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-function displayNews() {
+//     displayNews();
+// }
 
-    newsdetails.innerHTML = "";
+// const fetchSportsNews = async () => {
+//     const response = await fetch(SPORTS_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-    // if(newsDataArr.length == 0) {
-    //     newsdetails.innerHTML = "<h5>No data found.</h5>"
-    //     return;
-    // }
+//     displayNews();
+// }
 
-    newsDataArr.forEach(news => {
+// const fetchTechnologyNews = async () => {
+//     const response = await fetch(TECHNOLOGY_NEWS+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >=200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         // handle errors
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-        var date = news.publishedAt.split("T");
+//     displayNews();
+// }
 
-        var col = document.createElement('div');
-        col.className="col-sm-12 col-md-4 col-lg-3 p-2 card";
+// const fetchQueryNews = async () => {
 
-        var card = document.createElement('div');
-        card.className = "p-2";
+//     if(newsQuery.value == null)
+//         return;
 
-        var image = document.createElement('img');
-        image.setAttribute("height","matchparent");
-        image.setAttribute("width","100%");
-        image.src=news.urlToImage;
+//     const response = await fetch(SEARCH_NEWS+encodeURIComponent(newsQuery.value)+"&apiKey="+API_KEY);
+//     newsDataArr = [];
+//     if(response.status >= 200 && response.status < 300) {
+//         const myJson = await response.json();
+//         newsDataArr = myJson.articles;
+//     } else {
+//         //error handle
+//         console.log(response.status, response.statusText);
+//         newsdetails.innerHTML = "<h5>No data found.</h5>"
+//         return;
+//     }
 
-        var cardBody = document.createElement('div');
+//     displayNews();
+// }
 
-        var newsHeading = document.createElement('h5');
-        newsHeading.className = "card-title";
-        newsHeading.innerHTML = news.title;
+// function displayNews() {
 
-        var dateHeading = document.createElement('h6');
-        dateHeading.className = "text-primary";
-        dateHeading.innerHTML = date[0];
+//     newsdetails.innerHTML = "";
 
-        var discription = document.createElement('p');
-        discription.className="text-muted";
-        discription.innerHTML = news.description;
+//     // if(newsDataArr.length == 0) {
+//     //     newsdetails.innerHTML = "<h5>No data found.</h5>"
+//     //     return;
+//     // }
 
-        var link = document.createElement('a');
-        link.className="btn btn-dark";
-        link.setAttribute("target", "_blank");
-        link.href = news.url;
-        link.innerHTML="Read more";
+//     newsDataArr.forEach(news => {
 
-        cardBody.appendChild(newsHeading);
-        cardBody.appendChild(dateHeading);
-        cardBody.appendChild(discription);
-        cardBody.appendChild(link);
+//         var date = news.publishedAt.split("T");
 
-        card.appendChild(image);
-        card.appendChild(cardBody);
+//         var col = document.createElement('div');
+//         col.className="col-sm-12 col-md-4 col-lg-3 p-2 card";
 
-        col.appendChild(card);
+//         var card = document.createElement('div');
+//         card.className = "p-2";
 
-        newsdetails.appendChild(col);
-    });
+//         var image = document.createElement('img');
+//         image.setAttribute("height","matchparent");
+//         image.setAttribute("width","100%");
+//         image.src=news.urlToImage;
 
-}
+//         var cardBody = document.createElement('div');
+
+//         var newsHeading = document.createElement('h5');
+//         newsHeading.className = "card-title";
+//         newsHeading.innerHTML = news.title;
+
+//         var dateHeading = document.createElement('h6');
+//         dateHeading.className = "text-primary";
+//         dateHeading.innerHTML = date[0];
+
+//         var discription = document.createElement('p');
+//         discription.className="text-muted";
+//         discription.innerHTML = news.description;
+
+//         var link = document.createElement('a');
+//         link.className="btn btn-dark";
+//         link.setAttribute("target", "_blank");
+//         link.href = news.url;
+//         link.innerHTML="Read more";
+
+//         cardBody.appendChild(newsHeading);
+//         cardBody.appendChild(dateHeading);
+//         cardBody.appendChild(discription);
+//         cardBody.appendChild(link);
+
+//         card.appendChild(image);
+//         card.appendChild(cardBody);
+
+//         col.appendChild(card);
+
+//         newsdetails.appendChild(col);
+//     });
+
+// }

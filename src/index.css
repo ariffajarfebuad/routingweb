@@ -28,7 +28,7 @@ button {
 header nav {
   display: flex;
   gap: 16px;
-  justify-content: end;
+  justify-content: flex-end;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -93,6 +93,7 @@ form input, form textarea {
 form label span {
   margin-bottom: 10px;
 }
+
 /* breadcrumbs */
 .breadcrumbs {
   max-width: 1200px;
